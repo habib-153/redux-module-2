@@ -1,10 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useAppSelector } from "@/redux/hook";
 import AddTodoModal from "./AddTodoModal";
 import TodoCard from "./TodoCard";
 import TodoFilter from "./TodoFilter";
+import { useGetTodosQuery } from "@/redux/api/api";
 
 const TodoContainer = () => {
   const { todos } = useAppSelector((state) => state.todos)
+
+  const {data: todo, isLoading, isError} = useGetTodosQuery(undefined)
+
   return (
     <div>
       <div className="flex justify-between mb-5">
