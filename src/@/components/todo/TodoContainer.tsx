@@ -4,6 +4,7 @@ import AddTodoModal from "./AddTodoModal";
 import TodoCard from "./TodoCard";
 import TodoFilter from "./TodoFilter";
 import { useGetTodosQuery } from "@/redux/api/api";
+import { useState } from "react";
 
 type TodoCardProps = {
   id: string;
@@ -15,14 +16,15 @@ type TodoCardProps = {
 
 const TodoContainer = () => {
   //const { todos } = useAppSelector((state) => state.todos)
+  const [priority, setPriority] = useState('');
 
-  const { data: todo, isLoading, isError } = useGetTodosQuery(undefined);
+  const { data: todo, isLoading, isError } = useGetTodosQuery(priority);
   const todos = todo?.data;
   return (
     <div>
       <div className="flex justify-between mb-5">
         <AddTodoModal />
-        <TodoFilter />
+        <TodoFilter priority={priority} setPriority={setPriority}/>
       </div>
       <div className="bg-primary-gradient p-[5px] w-full h-full rounded-xl">
         {/* <div className="bg-white text-2xl font-bold p-5 text-center rounded-2xl">
